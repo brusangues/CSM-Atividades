@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 3 - Bruno</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Atividade da Aula 4 - Codificação de Imagem com DWT</h1>
+    <p>Bruno Sanches Rodrigues 11201721076</p>
+
+    <article>
+        <h2>1. Relacione semelhanças e diferenças entre a Transformada de Fourier e a Transformada Wavelet.</h2> 
+        <p>
+            A transformada de fourier utiliza a função senoide para converter um sinal para o domínio da frequência. A transformada Wavelet é uma generalização da transformada de fourier. Uma Wavelet funciona com uma fução limitada no tempo com média zero. A transformada wavelet elimina um problema da Fourier que é o tamanho fixo da janela deslizante.
+        </p>
+        <h2>2. O que significam os parâmetros a e b da CWT Ψa,b(t) (slide 8)?</h2>
+        <p>
+            O parâmetro <em>a</em> é o fator de compressão ou escala. Quanto menor o fator de escala, mais comprimido é o wavelet e maior sua frequência. Por outro lado, quando o fator de escala é grande, mais esticado é o wavelet, e menor sua frequência. <br>
+
+            O parâmetro <em>b</em> é o fator de posição, referente ao tempo ou espaço do sinal de entrada. Ele determina o ponto de análise.
+
+        </p>
+        <h2>3. Na DWT os parâmetros a e b assumem quaisquer valores? Explique.</h2>
+        <p>
+            Não. Na DWT, <em>a</em> e <em>b</em> são parâmetros discretos dependentes do número de linhas <em>m</em> e colunas <em>n</em> da imagem.
+        </p>
+        <h2>4. Por que podemos efetuar a separabilidade em Linhas e Colunas da DWT-1D, para obtenção da DWT-2D, assim como podíamos também efetuar na DCT-1D para obtenção da DCT-2D?</h2>
+        <p>
+            Por conta da ortogonalidade das transformadas, tanto na DCT quanto na DTW.
+        </p>
+
+        <h2>5. Qual a “taxa de compressão” fácil de ser obtida com a DWT2? Explique sua resposta.</h2>
+        <p>
+            75% (a imagem comprimida terá 25% do tamanho da original) pois podemos descartar as componentes horizontal, vertical e diagonal, ficando apenas com a componente da aproximação, que corresponde à um downsampling da imagem original.
+        </p>
+        <h2>6. Usando os filtros do banco de Haar mostrado no slide 28, mostre analiticamente a “Reconstrução Perfeita” de uma sequência real x(n). (Dica: é mais fácil no domínio Z).</h2>
+
+    </article>
+</body>
+</html>

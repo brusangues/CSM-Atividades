@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8" />
+<title>Aula 3 - Bruno</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration --></head>
+<body>
+<div tabindex="-1" class="border-box-sizing">
+  <div class="container">
+  <h1>Atividade da Aula 3 - Introdução à Codificação de Imagem</h1>
+  <p>Bruno Sanches Rodrigues 11201721076</p>
+
+  <article>
+      <h2>Exercício 3. Coeficientes da DCT-2D </h2>
+      <img src="ex03.png" alt="Enunciado do exercício">
+      <br>
+      <h2>A resposta foi dada no Jupyter Notebook convertido para html abaixo:</h2>
+      <p>Utilizei <a href="https://stackoverflow.com/questions/13171329/dct-2d-without-fft">esta implementação em matlab</a> como ponto de partida para minha resposta.</p>
+  </article>
+  </div>
+</div>
+
+
+
+
+<div tabindex="-1" id="notebook" class="border-box-sizing">
+<div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Criando o bloco f</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">128</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">64</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">l1</span><span class="p">,</span><span class="n">l2</span><span class="p">,</span><span class="n">l2</span><span class="p">,</span><span class="n">l1</span><span class="p">,</span><span class="n">l1</span><span class="p">,</span><span class="n">l2</span><span class="p">,</span><span class="n">l2</span><span class="p">,</span><span class="n">l1</span><span class="p">]</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(8, 8) [[128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Criando o bloco g</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">l4</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">32</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="n">l3</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">l4</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(8, 8) [[ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]
+ [ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]
+ [ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]
+ [ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Definindo funções para a a dct 2d</span>
+<span class="k">def</span> <span class="nf">C</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">w</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">summation1</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
+    <span class="n">h</span><span class="p">,</span><span class="n">w</span> <span class="o">=</span> <span class="n">block</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+            <span class="n">res</span><span class="o">+=</span> <span class="n">block</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(((</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="mi">16</span><span class="p">)</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(((</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="mi">16</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">summation1</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dct</span><span class="p">(</span><span class="n">block</span><span class="p">):</span>
+    <span class="n">block</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">block</span><span class="p">)</span>
+    <span class="n">dctBlock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+            <span class="n">dctBlock</span><span class="p">[</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">dctBlock</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Definindo funções para a a dct 2d inversa (deve haver algum erro)</span>
+<span class="k">def</span> <span class="nf">summation2</span><span class="p">(</span><span class="n">dctBlock</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+            <span class="n">res</span><span class="o">+=</span> <span class="n">C</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">F</span><span class="p">(</span><span class="n">dctBlock</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(((</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="mi">16</span><span class="p">)</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(((</span><span class="mi">2</span><span class="o">*</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="mi">16</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">def</span> <span class="nf">dct_inv</span><span class="p">(</span><span class="n">dctBlock</span><span class="p">):</span>
+    <span class="n">dctBlock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">dctBlock</span><span class="p">)</span>
+    <span class="n">dctInvBlock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dctBlock</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+            <span class="n">dctInvBlock</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="n">summation2</span><span class="p">(</span><span class="n">dctBlock</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">dctInvBlock</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Aplicando a dct e a dct inversa</span>
+<span class="n">f_dct</span> <span class="o">=</span> <span class="n">dct</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">f_dct_inv</span> <span class="o">=</span> <span class="n">dct_inv</span><span class="p">(</span><span class="n">f_dct</span><span class="p">)</span>
+
+<span class="c1"># Resultados</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f:&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f_dct&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">f_dct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f_dct_inv&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">f_dct_inv</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>f:
+[[128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]
+ [128 -64 -64 128 128 -64 -64 128]]
+f_dct
+[[256.   0.  -0.  -0. 768.   0.  -0.  -0.]
+ [ -0.   0.  -0.  -0.   0.  -0.   0.  -0.]
+ [  0.   0.  -0.  -0.  -0.   0.  -0.   0.]
+ [  0.   0.   0.   0.   0.  -0.  -0.  -0.]
+ [  0.   0.  -0.  -0.   0.   0.   0.   0.]
+ [  0.   0.  -0.   0.   0.  -0.   0.   0.]
+ [ -0.  -0.   0.  -0.  -0.   0.   0.  -0.]
+ [ -0.   0.   0.   0.  -0.   0.  -0.  -0.]]
+f_dct_inv
+[[256.   0.  -0.  -0. 768.   0.  -0.  -0.]
+ [ -0.  -0.  -0.  -0.  -0.  -0.   0.  -0.]
+ [  0.  -0.   0.  -0.  -0.  -0.   0.   0.]
+ [  0.   0.   0.   0.   0.  -0.   0.  -0.]
+ [ -0.   0.   0.   0.  -0.   0.  -0.  -0.]
+ [  0.   0.  -0.   0.   0.   0.  -0.  -0.]
+ [  0.  -0.   0.  -0.   0.   0.   0.  -0.]
+ [  0.  -0.  -0.  -0.  -0.  -0.   0.   0.]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Aplicando a dct e a dct inversa</span>
+<span class="n">g_dct</span> <span class="o">=</span> <span class="n">dct</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">g_dct_inv</span> <span class="o">=</span> <span class="n">dct_inv</span><span class="p">(</span><span class="n">g_dct</span><span class="p">)</span>
+
+<span class="c1"># Resultados</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g:&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g_dct&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">g_dct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g_dct_inv&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">g_dct_inv</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>g:
+[[ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]
+ [ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]
+ [ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]
+ [ 32  32  32  32  32  32  32  32]
+ [-32 -32 -32 -32 -32 -32 -32 -32]]
+g_dct
+[[  0.   0.   0.   0.   0.   0.   0.  -0.]
+ [ 46.   0.  -0.   0.   0.   0.  -0.  -0.]
+ [  0.  -0.  -0.   0.  -0.   0.  -0.   0.]
+ [ 54.   0.  -0.   0.   0.   0.  -0.  -0.]
+ [  0.   0.   0.   0.  -0.  -0.   0.   0.]
+ [ 81.   0.  -0.   0.   0.   0.  -0.  -0.]
+ [  0.   0.   0.  -0.  -0.  -0.   0.   0.]
+ [232.   0.  -0.   0.   0.   0.  -0.  -0.]]
+g_dct_inv
+[[ -0.   0.  -0.  -0.  -0.  -0.   0.   0.]
+ [ 46.   0.  -0.  -0.  -0.   0.  -0.   0.]
+ [  0.  -0.  -0.  -0.  -0.  -0.  -0.  -0.]
+ [ 54.  -0.  -0.  -0.  -0.   0.  -0.   0.]
+ [ -0.   0.  -0.  -0.  -0.   0.  -0.  -0.]
+ [ 81.  -0.  -0.   0.  -0.   0.  -0.  -0.]
+ [  0.  -0.  -0.  -0.   0.   0.  -0.  -0.]
+ [232.  -0.  -0.   0.  -0.   0.   0.  -0.]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Exemplo da aula foi feito como teste de sanidade</span>
+<span class="n">h</span> <span class="o">=</span><span class="p">[[</span><span class="mi">63</span><span class="p">,</span>  <span class="mi">33</span><span class="p">,</span>  <span class="mi">36</span><span class="p">,</span>  <span class="mi">28</span><span class="p">,</span>  <span class="mi">63</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span>  <span class="mi">86</span><span class="p">,</span>  <span class="mi">98</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">27</span><span class="p">,</span>  <span class="mi">18</span><span class="p">,</span>  <span class="mi">17</span><span class="p">,</span>  <span class="mi">11</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">108</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">72</span><span class="p">,</span>  <span class="mi">52</span><span class="p">,</span>  <span class="mi">28</span><span class="p">,</span>  <span class="mi">15</span><span class="p">,</span>  <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span>  <span class="mi">47</span><span class="p">,</span>  <span class="mi">77</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">132</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span>  <span class="mi">56</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span>  <span class="mi">21</span><span class="p">,</span>  <span class="mi">55</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">187</span><span class="p">,</span> <span class="mi">186</span><span class="p">,</span> <span class="mi">166</span><span class="p">,</span>  <span class="mi">88</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span>  <span class="mi">43</span><span class="p">,</span>  <span class="mi">51</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">184</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">177</span><span class="p">,</span>  <span class="mi">82</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span>  <span class="mi">97</span><span class="p">,</span>  <span class="mi">73</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">211</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span>  <span class="mi">78</span><span class="p">,</span>  <span class="mi">83</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">211</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">133</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span>  <span class="mi">74</span><span class="p">,</span>  <span class="mi">86</span><span class="p">]]</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Aplicando a dct e a dct inversa</span>
+<span class="n">h_dct</span> <span class="o">=</span> <span class="n">dct</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">h_dct_inv</span> <span class="o">=</span> <span class="n">dct_inv</span><span class="p">(</span><span class="n">h_dct</span><span class="p">)</span>
+
+<span class="c1"># Resultados</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h:&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h_dct&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">h_dct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h_dct_inv&quot;</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="n">h_dct_inv</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>h:
+[[ 63.  33.  36.  28.  63.  81.  86.  98.]
+ [ 27.  18.  17.  11.  22.  48. 104. 108.]
+ [ 72.  52.  28.  15.  17.  16.  47.  77.]
+ [132. 100.  56.  19.  10.   9.  21.  55.]
+ [187. 186. 166.  88.  13.  34.  43.  51.]
+ [184. 203. 199. 177.  82.  44.  97.  73.]
+ [211. 214. 208. 198. 134.  52.  78.  83.]
+ [211. 210. 203. 191. 133.  79.  74.  86.]]
+h_dct
+[[ 720.  210.  104.  -69.   10.   20.  -12.    7.]
+ [-327. -260.   67.   70.  -10.  -15.   21.    8.]
+ [  93.  -84.  -66.   16.   24.   -2.   -5.    9.]
+ [  89.   33.  -19.  -20.  -26.   21.   -3.    0.]
+ [  -9.   42.   18.   27.   -7.  -17.   29.   -7.]
+ [  -5.   15.  -10.   17.   32.  -15.   -4.    7.]
+ [  10.    3.  -12.   -1.    2.    3.   -2.   -3.]
+ [  12.   30.    0.   -3.   -3.   -6.   12.   -1.]]
+h_dct_inv
+[[ 720.  210.  104.  -69.   10.   20.  -12.    7.]
+ [-327. -260.   67.   70.  -10.  -15.   21.    8.]
+ [  93.  -84.  -66.   16.   24.   -2.   -5.    9.]
+ [  89.   33.  -19.  -20.  -26.   21.   -3.    0.]
+ [  -9.   42.   18.   27.   -7.  -17.   29.   -7.]
+ [  -5.   15.  -10.   17.   32.  -15.   -4.    7.]
+ [  10.    3.  -12.   -1.    2.    3.   -2.   -3.]
+ [  12.   30.    0.   -3.   -3.   -6.   12.   -1.]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+</body>
+
+ 
+
+
+</html>

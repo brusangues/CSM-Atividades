@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 3 - Bruno</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        function includeHTML() {
+          var z, i, elmnt, file, xhttp;
+          /* Loop through a collection of all HTML elements: */
+          z = document.getElementsByTagName("*");
+          for (i = 0; i < z.length; i++) {
+            elmnt = z[i];
+            /*search for elements with a certain atrribute:*/
+            file = elmnt.getAttribute("w3-include-html");
+            if (file) {
+              /* Make an HTTP request using the attribute value as the file name: */
+              xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                  if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                  if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                  /* Remove the attribute, and call this function once more: */
+                  elmnt.removeAttribute("w3-include-html");
+                  includeHTML();
+                }
+              }
+              xhttp.open("GET", file, true);
+              xhttp.send();
+              /* Exit the function: */
+              return;
+            }
+          }
+        }
+    </script>
+</head>
+<body>
+    <h1>Atividade da Aula 3 - Introdução à Codificação de Imagem</h1>
+    <p>Bruno Sanches Rodrigues 11201721076</p>
+
+    <article>
+        <h2>Exercício 3. Coeficientes da DCT-2D </h2>
+        <img src="ex03.png" alt="Enunciado do exercício">
+        <br>
+        <h2>A resposta foi dada no Jupyter Notebook convertido para html abaixo:</h2>
+        <p>Utilizei <a href="https://stackoverflow.com/questions/13171329/dct-2d-without-fft">esta implementação em matlab</a> para me basear no código.</p>
+        <div w3-include-html="ex03.html"></div>
+    </article>
+
+
+    <script>
+        includeHTML();
+    </script>
+</body>
+</html>

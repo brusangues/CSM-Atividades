@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: auto;
+    width: 90%;
+    /*border: 3px solid green;*/
+    max-width: 1000px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.division {
+  margin-top:25px;
+  border: 2px solid;
+  border-radius: 2px;
+  background-color: black;
+}
+  /* Style the header */
+  header {
+    background-color: #666;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+img{
+    max-height: 180px;
+    max-width: 180px;
+    border-radius: 150px;
+    margin: 10px 0 0px 30px;
+}
+  
+  /* Create two columns/boxes that floats next to each other */
+  nav {
+    float: left;
+    width: 20%;
+    background: #ccc;
+    padding: 20px;
+    min-height: 1550px;
+  }
+h2 {
+    line-height: 26px;
+    margin-bottom: 6px;
+}
+p {
+    line-height: 24px;
+    margin-top: 4px;
+}
+
+a {
+    color: #000099;
+    text-decoration: None;
+}
+a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  article {
+    float: left;
+    padding: 20px;
+    width: 80%;
+    background-color: #f1f1f1;
+    min-height: 1550px;
+  }
+  
+  /* Clear floats after the columns */
+  section:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Style the footer */
+  footer {
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+  @media (max-width: 600px) {
+    nav, article {
+      width: 100%;
+      height: auto;
+      min-height: auto;
+    }
+  }
