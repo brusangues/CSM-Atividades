@@ -1,2 +1,4 @@
-/audacity/
-audacity*
+/_audacity/
+_audacity*
+.vscode/
+/.vscode/
