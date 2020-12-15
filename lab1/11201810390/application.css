@@ -1,0 +1,20 @@
+body {
+    margin: auto;
+    width: 80%;
+    margin: auto;
+    background: url(bg.jpg);
+}
+main {
+    background: #ffffff8c;
+    padding 5px 40px;
+    margin-top: 20px;
+    border-radius: 13px;
+}
+.foto {
+    max-height: 200px;
+    max-width: 200px;
+    border-radius: 200px;
+}
+.inicio{
+  text-align: center;
+}

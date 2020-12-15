@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório 6 - Bruno Sanches Rodrigues</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <h1>Laboratório 6 - Bruno Sanches Rodrigues</h1>
+    <h2>2) Teste de audiometria</h2>
+    <p>
+        Áudio do computador: <br>
+        <object data="2a.pdf" width="600" height="500"></object> <br> 
+        Áudio do fone de ouvido envolvente: <br>
+        <object data="2b.pdf" width="600" height="500"></object> <br>
+        O áudio do meu notebook não é muito bom, e o ambiente não estava tão silencioso. Por isso, os resultados foram melhores com o fone de ouvido.
+    </p>
+    <h2>3) Teste de Faixa Audível</h2>
+    <p>
+        Áudio do computador:
+        <ul>
+            <li>fmin: 250 Hz</li>
+            <li>fmax: 1550 Hz</li>
+        </ul>
+        Áudio do fone de ouvido envolvente:
+        <ul>
+            <li>fmin: 40 Hz</li>
+            <li>fmax: 1600 Hz</li>
+        </ul>
+        Áudio do celular:
+        <ul>
+            <li>fmin: 120 Hz</li>
+            <li>fmax: 1600 Hz</li>
+        </ul>
+        Em todos os testes, as frequências mais baixas aparentavam ter volume mais baixo, enquanto que as frequências mais altas aparentavam ter volume mais alto, exceto quando chegava perto da fmax. <br>
+        As diferenças entre as faixas ocorrem pois cada speaker tem a sua faixa dinâmica, e também pois há um mascaramento maior do ruído do ambiente quando não estamos utilizando fone de ouvido, especialmente se forem fones envolventes. 
+    </p>
+    <h2>4) Teste de Mascaramento de Tons Harmônicos </h2>
+    <p>
+        Utilizei meu fone de ouvido envolvente.
+        <table>
+            <tr><th>Aluno</th> <th>Tom encobridor</th> <th>Tom mascarado</th> <th>Fator de Atenuação</th></tr>
+
+            <tr><td>Bruno</td> <td>2.0kHz</td> <td>1.2kHz</td> <td>-12dB</td></tr>
+            <tr><td>Bruno</td> <td>1.2kHz</td> <td>2.0kHz</td> <td>-12dB</td></tr>
+
+            <tr><td>Bruno</td> <td>1.0kHz</td> <td>0.6kHz</td> <td>-12dB</td></tr>
+            <tr><td>Bruno</td> <td>0.6kHz</td> <td>1.0kHz</td> <td>-12dB</td></tr>
+
+            <tr><td>Bruno</td> <td>4.0kHz</td> <td>2.4kHz</td> <td>-12dB</td></tr>
+            <tr><td>Bruno</td> <td>2.4kHz</td> <td>4.0kHz</td> <td>-12dB</td></tr>
+        </table> <br>
+        Por algum motivo, os fatores de atenuação foram sempre -12bB, para todas as frequências analisadas. Talvez seja algum problema do tempo de resposta do meu fone de ouvido, pois ele se conecta ao meu computador via bluetooth.
+
+    </p>
+</body>
+</html>

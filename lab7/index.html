@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratórios de CSM Grupo DEVS</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<div class="main">
+    
+    <h1>Laboratório 7 - Codificação de Voz</h1>
+    <ol>
+        <li> Determinação dos parâmetros LPC </li>
+        <li> Separação Sonora/Surda</li>
+        <li> Espectro e Envoltória LP</li>
+        <li> Comparação de Codificações MPEG</li>
+    </ol>
+
+    <h3>Separação dos Nomes</h3>
+    
+    <p><b>Primeiro Nome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Jonas/Jonas_1.png" alt=  "Jonas/Jonas_1.png"></div>
+        <div class="column"> <img src=  "Bruno/Bruno_1.png" alt=  "Bruno/Bruno_1.png"></div>
+    </div>
+    <div class="row">
+        <div class="column"> <img src="Gabriel/Gabriel_1.png" alt="Gabriel/Gabriel_1.png"></div>
+        <div class="column"> <img src=  "Lucas/Lucas_1.png" alt=  "Lucas/Lucas_1.png"></div>
+    </div>
+    <div class="row">
+        <div class="column"> <img src="Matheus/Matheus_1.png" alt="Matheus/Matheus_1.png"></div>
+        <div class="column"> <img src="Matheus/EspectroNome.png" alt="Matheus/EspectroNome.png"></div>
+    </div>
+
+    <p><b>Sobrenome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Jonas/Jonas_5.png" alt=  "Jonas/Jonas_5.png"></div>
+        <div class="column"> <img src=  "Bruno/Bruno_5.png" alt=  "Bruno/Bruno_5.png"></div>
+    </div>
+    <div class="row">
+        <div class="column"> <img src="Gabriel/Gabriel_5.png" alt="Gabriel/Gabriel_5.png"></div>
+        <div class="column"> <img src=  "Lucas/Lucas_5.png" alt=  "Lucas/Gabriel_5.png"></div>
+    </div>
+    <div class="row">
+        <div class="column"> <img src="Matheus/Matheus_4.png" alt="Matheus/Matheus_4.png"></div>
+        <div class="column"> <img src="Matheus/EspectroSobrenome.png" alt="Matheus/EspectroSobrenome.png"></div>
+    </div>
+
+    <h3>Cálculo dos Parâmetros LPC, separação U/UV e Espectro + Envoltória LPC</h3>
+
+    <p><b>Bruno Nome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Bruno/Bruno_2.png" alt=  "Bruno/Bruno_2.png"></div>
+        <div class="column"> <img src=  "Bruno/Bruno_3.png" alt=  "Bruno/Bruno_3.png"></div>
+        <div class="column"> <img src=  "Bruno/Bruno_4.png" alt=  "Bruno/Bruno_4.png"></div>
+    </div>
+    <p><b>Gabriel Nome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Gabriel/Gabriel_2.png" alt=  "Gabriel/Gabriel_2.png"></div>
+        <div class="column"> <img src=  "Gabriel/Gabriel_3.png" alt=  "Gabriel/Gabriel_3.png"></div>
+        <div class="column"> <img src=  "Gabriel/Gabriel_4.png" alt=  "Gabriel/Gabriel_4.png"></div>
+    </div>
+    <p><b>Jonas Nome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Jonas/Jonas_2.png" alt=  "Jonas/Jonas_2.png"></div>
+        <div class="column"> <img src=  "Jonas/Jonas_3.png" alt=  "Jonas/Jonas_3.png"></div>
+        <div class="column"> <img src=  "Jonas/Jonas_4.png" alt=  "Jonas/Jonas_4.png"></div>
+    </div>
+    <p><b>Lucas Nome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Lucas/Lucas_2.png" alt=  "Lucas/Lucas_2.png"></div>
+        <div class="column"> <img src=  "Lucas/Lucas_3.png" alt=  "Lucas/Lucas_3.png"></div>
+        <div class="column"> <img src=  "Lucas/Lucas_4.png" alt=  "Lucas/Lucas_4.png"></div>
+    </div>
+    <p><b>Matheus Nome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Matheus/Matheus_2.png" alt=  "Matheus/Matheus_2.png"></div>
+        <div class="column"> <img src=  "Matheus/Matheus_3.png" alt=  "Matheus/Matheus_3.png"></div>
+        <br><p>*Não houve segmento Surdo*</p>
+    </div>
+
+    <p><b>Bruno Sobrenome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Bruno/Bruno_6.png" alt=  "Bruno/Bruno_6.png"></div>
+        <div class="column"> <img src=  "Bruno/Bruno_7.png" alt=  "Bruno/Bruno_7.png"></div>
+        <div class="column"> <img src=  "Bruno/Bruno_8.png" alt=  "Bruno/Bruno_8.png"></div>
+    </div>
+    <p><b>Gabriel Sobrenome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Gabriel/Gabriel_6.png" alt=  "Gabriel/Gabriel_6.png"></div>
+        <div class="column"> <img src=  "Gabriel/Gabriel_7.png" alt=  "Gabriel/Gabriel_7.png"></div>
+        <div class="column"> <img src=  "Gabriel/Gabriel_8.png" alt=  "Gabriel/Gabriel_8.png"></div>
+    </div>
+    <p><b>Jonas Sobrenome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Jonas/Jonas_6.png" alt=  "Jonas/Jonas_6.png"></div>
+        <div class="column"> <img src=  "Jonas/Jonas_7.png" alt=  "Jonas/Jonas_7.png"></div>
+        <div class="column"> <img src=  "Jonas/Jonas_8.png" alt=  "Jonas/Jonas_8.png"></div>
+    </div>
+    <p><b>Lucas Sobrenome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Lucas/Lucas_6.png" alt=  "Lucas/Lucas_6.png"></div>
+        <div class="column"> <img src=  "Lucas/Lucas_7.png" alt=  "Lucas/Lucas_7.png"></div>
+        <div class="column"> <img src=  "Lucas/Lucas_8.png" alt=  "Lucas/Lucas_8.png"></div>
+    </div>
+    <p><b>Matheus Sobrenome</b></p>
+    <div class="row">
+        <div class="column"> <img src=  "Matheus/Matheus_4.png" alt=  "Matheus/Matheus_4.png"></div>
+        <div class="column"> <img src=  "Matheus/Matheus_5.png" alt=  "Matheus/Matheus_5.png"></div>
+        <div class="column"> <img src=  "Matheus/Matheus_6.png" alt=  "Matheus/Matheus_6.png"></div>
+        <div class="column"> <img src=  "Matheus/Matheus_7.png" alt=  "Matheus/Matheus_7.png"></div>
+    </div>
+
+    <h3>Análise dos Resultados</h3>
+    <p><b>Matheus:</b>Na análise do nome, não foi possível encontrar segmentos surdos devido o alto número de trechos sonoros (e com energia alta) nos fonemas "Ma", "te" e "us". No geral, foi possível notar a presença de mais segmentos sonoros do que surdos, tanto nos trechos de Nome quanto no de sobrenome.</p><br>
+    
+    <p><b>Jonas:</b>Em ambos o nome e sobrenome encontrei tanto segmentos surdos como sonoros. Comparado ao áudio da Katia do exemplo do laboratório tive que aumentar o limiar de atividade, provavelmente por eu ter falado meu nome mais baixo do que elá falou o poema. Como as energias de "Jonas" e "Greco" são muito parecidas, pois os segmentos sonoros e surdos se encontram em tempos próximos os espectros e a LPC ficaram muito parecidas tanto no nome como no sobrenome..</p><br>
+
+    <p>
+        <b>Bruno: </b>Encontrei poucos segmentos surdos tanto no nome quanto no sobrenome. Os segmentos surdos se concentraram no final tanto do nome quanto do sobrenome, quando já não havia voz ou quando o único som era o \s\ de Rodrigues.
+    </p>
+
+
+    <p><b>Geral:</b> </p><br>
+
+    <h3>Relatórios individuais</h3>
+    <h3>Links para o Jupyter Notebook</h3>
+    <p>
+        Bruno Sanches Rodrigues  <a   href="./Bruno/Lab7_Bruno.ipynb">.ipynb</a> <br>
+        Gabriel Ferreira Prodi   <a href="./Gabriel/Lab7_Gabriel.ipynb">.ipynb</a> <br>
+        Jonas Greco Onias        <a   href="./Jonas/Lab7_Jonas.ipynb">.ipynb</a> <br>
+        Lucas Turano Machado     <a   href="./Lucas/Lab7_Lucas.ipynb">.ipynb</a> <br>
+        Matheus Moreira Francisco<a href="./Matheus/Lab7_CodificacaoVoz.ipynb">.ipynb</a> <br>
+    </p>
+
+    <h2>Audios Utilizados</h2>
+    Bruno Nome e Sobrenome <br>
+    <audio controls>
+            <source src="Bruno/BrunoSanchesRodrigues.wav" type="audio/ogg">
+            Your browser does not support the audio element.
+    </audio><br>
+    Gabriel Nome e Sobrenome <br>
+    <audio controls>
+            <source src="audioLab6.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+    </audio><br>
+    Jonas Nome e Sobrenome <br>
+    <audio controls>
+            <source src="Jonas/JonasGrecoOnias.wav" type="audio/wav">
+            Your browser does not support the audio element.
+    </audio><br>
+    Lucas Nome e Sobrenome <br>
+    <audio controls>
+            <source src="audioLab6.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+    </audio><br>
+    Matheus Nome e Sobrenome <br>
+    <audio controls>
+            <source src="Matheus/MatheusMoreira.wav" type="audio/wav">
+            Your browser does not support the audio element.
+    </audio><br>
+
+    <h2>Audio Descrição</h2>
+    <audio controls>
+            <source src="audioLab6.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+    </audio><br>
+   
+</div>
+</body>
+</html>
